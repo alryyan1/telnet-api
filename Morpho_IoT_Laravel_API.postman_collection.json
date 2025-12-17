@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "morpho-iot-laravel-api",
+		"name": "Morpho IoT Laravel API",
+		"description": "Postman collection for testing Morpho IoT Device Integration in Laravel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Authentication",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/morpho/auth",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"morpho",
+						"auth"
+					]
+				},
+				"description": "Authenticate with Morpho API and get access token"
+			},
+			"response": []
+		},
+		{
+			"name": "2. Send Device Status",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"device_id\": 7777,\n  \"client_id\": 0,\n  \"firmware_version\": \"2.1.4B\",\n  \"ip_address\": \"165.51.150.150\",\n  \"timestamp\": 1762275949,\n  \"gps\": {\n    \"latitude\": 36.8001,\n    \"longitude\": 10.1874,\n    \"altitude\": 23,\n    \"accuracy\": 0\n  },\n  \"rssi\": -51,\n  \"batterie_level\": 100,\n  \"temperature\": 32.43,\n  \"humidity\": 30.70,\n  \"mean_vibration\": 1.03,\n  \"light\": 527.90,\n  \"status\": \"Connected\",\n  \"nbrfid\": 0\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/morpho/device/status",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"morpho",
+						"device",
+						"status"
+					]
+				},
+				"description": "Send device status to Morpho API"
+			},
+			"response": []
+		},
+		{
+			"name": "3. Send Device Logs",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"severity\": \"error\",\n  \"timestamp\": 1762275881,\n  \"hostname\": \"165.51.150.150\",\n  \"application\": \"2.1.4B\",\n  \"device_id\": 7777,\n  \"event_id\": 0,\n  \"message\": \"Minimum threshold exceeded on SDCard Current\",\n  \"context\": {\n    \"last_reading\": -8.81,\n    \"thresholds\": {\n      \"min\": -1,\n      \"max\": 1000,\n      \"max_var\": 250\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "{{base_url}}/api/morpho/device/logs",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"morpho",
+						"device",
+						"logs"
+					]
+				},
+				"description": "Send device logs to Morpho API"
+			},
+			"response": []
+		},
+		{
+			"name": "4. Fetch Device Configuration",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/morpho/device/config?device_id={{device_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"morpho",
+						"device",
+						"config"
+					],
+					"query": [
+						{
+							"key": "device_id",
+							"value": "{{device_id}}",
+							"description": "Device ID"
+						}
+					]
+				},
+				"description": "Fetch device configuration from Morpho API"
+			},
+			"response": []
+		},
+		{
+			"name": "5. Fetch Reboot Command",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/api/morpho/device/reboot?device_id={{device_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"api",
+						"morpho",
+						"device",
+						"reboot"
+					],
+					"query": [
+						{
+							"key": "device_id",
+							"value": "{{device_id}}",
+							"description": "Device ID"
+						}
+					]
+				},
+				"description": "Fetch reboot command from Morpho API"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://alroomy.a.pinggy.link",
+			"type": "string"
+		},
+		{
+			"key": "device_id",
+			"value": "7777",
+			"type": "string"
+		}
+	]
+}
+
